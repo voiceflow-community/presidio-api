@@ -1,0 +1,21 @@
+{
+  "name": "presidio-api",
+  "module": "app.js",
+  "type": "module",
+  "scripts": {
+    "dev": "bun --watch ./src/app.js",
+    "app": "bun ./src/app.js",
+    "start": "docker-compose down && docker-compose up --remove-orphans --build -d",
+    "stop": "docker-compose down --remove-orphans"
+  },
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "figlet": "^1.6.0",
+    "hono": "^3.7.6"
+  }
+}

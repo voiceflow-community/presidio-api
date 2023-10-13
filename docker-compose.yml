@@ -1,0 +1,26 @@
+version: '3'
+services:
+  presidio-analyzer:
+    image: mcr.microsoft.com/presidio-analyzer:latest
+    container_name: 'presidio-analyzer'
+    restart: unless-stopped
+    ports:
+      - 5001:3000
+  presidio-anonymizer:
+    image: mcr.microsoft.com/presidio-anonymizer:latest
+    container_name: 'presidio-anonymizer'
+    restart: unless-stopped
+    ports:
+      - 5002:3000
+  presidio-api:
+    build: .
+    restart: unless-stopped
+    image: 'presidio-api'
+    container_name: 'presidio-api'
+    ports:
+      - ${PORT}:${PORT}
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - PORT=${PORT}
