@@ -1,5 +1,5 @@
 # Based on https://raw.githubusercontent.com/github/gitignore/main/Node.gitignore
-
+backup
 # Logs
 
 logs
@@ -167,3 +167,4 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.\*
+.DS_Store

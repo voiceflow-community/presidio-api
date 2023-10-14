@@ -10,6 +10,10 @@ The request body should contain a text to be anonymized, a language shortcode, a
 While this sample demo use English only, Presidio can be used to detect PII entities in multiple languages.
 Refer to the [multi-language support](languages.md) for more information.
 
+### Request
+The request body should contain a text to be anonymized, and optionally, a score, an exlude array (words in that array will not be ananymized) and a configuration for the anonymizers.
+
+
 Here is an example of a simple request:
 `POST: http://127.0.0.1:3006/anonymize`
 ```json
@@ -48,16 +52,38 @@ And a more complex one with anonymizers configuration:
 {
 	"text":"John Smith phone number is +33123456789",
 	"language":"en",
+	"score":0.75,
+	"exclude":["min", "hi", "earth", "max", "Voiceflow"],
 	"anonymizers": {
-		"DEFAULT": {
-			"type": "replace",
-			"new_value": "ANONYMIZED"
-		},
 		"PHONE_NUMBER": {
 			"type": "mask",
 			"masking_char": "*",
-			"chars_to_mask": 6,
+			"chars_to_mask": 8,
 			"from_end": false
+		},
+		"EMAIL_ADDRESS": {
+			"type": "mask",
+			"masking_char": "*",
+			"chars_to_mask": 8,
+			"from_end": false
+		},
+		"IP_ADDRESS": {
+			"type": "mask",
+			"masking_char": "*"
+		},
+		"DATE_TIME": {
+			"type": "keep"
+		},
+		"URL": {
+			"type": "keep"
+		},
+		"LOCATION": {
+			"type": "replace",
+			"new_value": "LOCATION"
+		},
+		"DEFAULT": {
+			"type": "replace",
+			"new_value": "ANONYMIZED"
 		}
 	}
 }
@@ -97,6 +123,7 @@ The application uses the following environment variables:
 - `PORT`: The port on which the application will listen.
 - `ANALYZE_ENDPOINT`: The endpoint of the Presidio Analyzer service (default to `http://presidio-analyzer:3000/analyze`).
 - `ANONYMIZE_ENDPOINT`: The endpoint of the Presidio Anonymizer service (default to `http://presidio-anonymizer:3000/anonymize`).
+- `SCORE`: The score threshold for the Presidio Anonymizer service (default to `0.75`).
 
 These variables should be set in a `.env` file in the root directory of the project.
 You can use the **.env.template** as an example:
@@ -106,6 +133,7 @@ NODE_ENV = production
 PORT = 3006
 ANALYZE_ENDPOINT = http://presidio-analyzer:3000/analyze
 ANONYMIZE_ENDPOINT = http://presidio-anonymizer:3000/anonymize
+SCORE = 0.75
 ```
 
 ### Docker
