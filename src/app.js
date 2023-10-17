@@ -44,6 +44,7 @@ app.post('/anonymize', async (c) => {
     )
     return c.json(anonymizer_results, 200)
   } catch (error) {
+    console.log(error.message)
     return c.json({ error: error.message }, 400)
   }
 })
@@ -71,7 +72,12 @@ async function anonymize(text, analyzer_results, anonymizers, score, exclude) {
   let url = Bun.env.ANONYMIZE_ENDPOINT
 
   score = score || Bun.env.SCORE
-  exclude = exclude.map((item) => item.toLowerCase()) || []
+  if (exclude && exclude.length > 0) {
+    exclude = exclude.map((item) => item.toLowerCase()) || []
+  } else {
+    exclude = []
+  }
+
   analyzer_results = analyzer_results.filter((item) => {
     let entityText = text.substring(item.start, item.end).toLowerCase()
     return item.score >= score && !exclude.includes(entityText)
