@@ -153,6 +153,13 @@ The `package.json` file defines several scripts for running the application and 
 So to run everything, use:
 `npm start`
 
+## Video
+https://youtu.be/CKIoCGraulM
+
+## Demo project
+You can import the demo project on your Voiceflow dashboard using this link:
+https://creator.voiceflow.com/dashboard?import=652911763fb9db0007fca037
+
 ## Voiceflow Discord
 
 We can talk about this project on Discord
