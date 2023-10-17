@@ -12,7 +12,8 @@ Refer to the [multi-language support](languages.md) for more information.
 
 ### Request
 The request body should contain a text to be anonymized, and optionally, a score, an exlude array (words in that array will not be ananymized) and a configuration for the anonymizers.
-
+You can find more info regarding the available operators in Presidio documentation here: https://microsoft.github.io/presidio/anonymizer/#built-in-operators
+And a list of the supported entities is available here: https://microsoft.github.io/presidio/supported_entities/
 
 Here is an example of a simple request:
 `POST: http://127.0.0.1:3006/anonymize`
