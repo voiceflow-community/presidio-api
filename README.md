@@ -165,3 +165,5 @@ https://creator.voiceflow.com/dashboard?import=652911763fb9db0007fca037
 We can talk about this project on Discord
 https://discord.gg/9JRv5buT39
 
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=voiceflow-community_presidio-api&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=voiceflow-community_presidio-api)
